@@ -105,18 +105,6 @@ st.write(descripcion)
 
 st.markdown("---")
 
-
-# Audio original del video (si existe)
-if ruta_audio and os.path.exists(ruta_audio):
-    st.subheader("🎧 Audio del video")
-    with open(ruta_audio, "rb") as f:
-        st.audio(f.read(), format="audio/mp3")
-else:
-    st.info("No hay audio almacenado para este video.")
-
-st.markdown("---")
-
-
 # ======================================================
 # 🧠 ANÁLISIS NARRATIVO
 # ======================================================
