@@ -1,10 +1,6 @@
 import streamlit as st
-import utils.audio_generator
 from utils.mostrar_datos_ingresados import mostrar_datos_ingresados
 import os
-
-from utils.chatbot_narracoach import NarraCoach
-from utils.chat_ui import bubble_user, bubble_assistant, thinking_spinner
 
 
 # --- Bloqueo: si no está procesado, no puedes entrar ---
