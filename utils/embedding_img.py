@@ -88,7 +88,7 @@ def buscar_similares_por_canal(
                 "id": df_canal.iloc[idx]["id"],
                 "canal": canal,
                 "distancia": float(dist[idx]),
-                "embedding": df_canal.iloc[idx]["embedding"],
+                "embedding": df_canal.iloc[idx]["embedding_img"],
                 "img_path": df_canal.iloc[idx].get("img_path", None)
             })
 
