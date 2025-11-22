@@ -22,6 +22,8 @@ PARQUET_PATH = "./DATA/dataframes/PROD_DATASET.parquet"
 
 try:
     df = load_data(PARQUET_PATH)
+    # Reconstruir rutas de imagen correctamente
+    df["img_path"] = df["id"].astype(str).map(lambda x: f"./DATA/images/{x}.jpg")
 except Exception as e:
     st.error(f"❌ Error cargando archivo parquet: {e}")
     st.stop()
