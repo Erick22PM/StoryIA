@@ -2,9 +2,7 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 from openai import OpenAI
-from dotenv import load_dotenv
 import os
-load_dotenv()
 
 
 # ======================================================

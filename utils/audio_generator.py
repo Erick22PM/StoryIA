@@ -2,9 +2,7 @@
 
 from elevenlabs.client import ElevenLabs
 import io
-from dotenv import load_dotenv
 import os
-load_dotenv()
 
 client_ElevenLabs = ElevenLabs(
     api_key=os.getenv("ELEVENLABS_API")

@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit as st
 
 def validar_imagen(session_state, nombre_variable="guion_image", pagina_destino="pages/1_Carga_de_archivos.py"):
     """
