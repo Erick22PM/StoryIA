@@ -9,9 +9,11 @@ import streamlit as st
 import pandas as pd
 import seaborn as sns
 
-# Descargar recursos NLTK si no existen
-nltk.download('punkt')
-nltk.download('stopwords')
+
+import re
+
+def simple_tokenize(text):
+    return re.findall(r"\b\w+\b", text.lower())
 
 
 def get_dashboard_guion(transcripcion):
@@ -25,7 +27,7 @@ def get_dashboard_guion(transcripcion):
     # ------------------------------------------------------
     # Tokenizar y limpiar
     stopwords_es = set(stopwords.words("spanish"))
-    tokens = [w.lower() for w in word_tokenize(text) if w.isalpha()]
+    tokens = simple_tokenize(text)
     tokens_limpios = [t for t in tokens if t not in stopwords_es]
 
     # Contar palabras
