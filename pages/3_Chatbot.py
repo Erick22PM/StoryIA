@@ -1,6 +1,13 @@
 import streamlit as st
 from utils.chatbot_narracoach import NarraCoach
 from openai import OpenAI
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
+client = OpenAI(
+  api_key=os.getenv("OPENAI_API_KEY")
+)
 
 st.title("🤖 Chat con NarraCoach")
 st.caption("💬 Tu coach narrativo personal para mejorar tu guion.")
@@ -22,13 +29,6 @@ if "guion_embedding" not in st.session_state:
 if "puntaje_modelo" not in st.session_state:
     st.error("⚠️ Falta el score calculado del guion.")
     st.stop()
-
-
-# ======================================================
-# CLIENTE OPENAI (lo usas internamente en NarraCoachSession)
-# ======================================================
-client = OpenAI(api_key="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")
-
 
 
 # ======================================================
