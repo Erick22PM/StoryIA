@@ -22,8 +22,6 @@ PARQUET_PATH = "./DATA/dataframes/PROD_DATASET.parquet"
 
 try:
     df = load_data(PARQUET_PATH)
-    # Reconstruir rutas de imagen correctamente
-    df["img_path"] = df["id"].astype(str).map(lambda x: f"./DATA/images/{x}.jpg")
 except Exception as e:
     st.error(f"❌ Error cargando archivo parquet: {e}")
     st.stop()
@@ -208,6 +206,8 @@ for col, (_, r) in zip(cols, df_recom_i.iterrows()):
         img = r.get("img_path", None)
         if img and os.path.exists(img):
             st.image(img, width='stretch')
+        else:
+            st.image("https://via.placeholder.com/400x300?text=Sin+imagen", width='stretch')
 
         if st.button("Ver guión", key=f"btn_i_{r['id']}"):
             st.session_state.selected_id = r["id"]
