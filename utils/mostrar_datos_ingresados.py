@@ -59,7 +59,7 @@ def mostrar_datos_ingresados(session_state):
 
     with col_img:
         st.subheader("Imagen")
-        st.image(imagen, use_container_width=True)
+        st.image(imagen, width='stretch')
 
     with col_text:
         st.subheader("Texto del guión")

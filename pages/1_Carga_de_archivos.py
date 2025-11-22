@@ -2,6 +2,9 @@ import streamlit as st
 import numpy as np
 from utils.text_embeddings import embed_text_robusto
 
+with st.sidebar:
+    st.image("assets/logo.png", width=150)
+    
 st.title("📝 Cargar de archivos")
 
 # --- Inicializar variables de sesión ---
@@ -37,34 +40,50 @@ if st.session_state.edit_mode:
     )
 
     # Botón de guardar
+    # Botón de guardar
     if st.button("Guardar datos"):
         if not guion.strip():
             st.warning("⚠️ Debes ingresar un guión antes de continuar.")
         else:
-            # Detectar si el guion cambió
             guion_cambiado = (guion != st.session_state.guion_text)
 
             st.session_state.guion_text = guion
-
             if imagen:
                 st.session_state.guion_image = imagen
 
-            # =========================================
-            # 🔥 RE-CALCULAR EMBEDDING SI CAMBIÓ EL GUIÓN
-            # =========================================
+            # ===================================================
+            # 🔥 PROCESAMIENTO COMPLETO DEL GUION
+            # ===================================================
             if guion_cambiado:
-                with st.spinner("🔄 Generando embedding del guión..."):
-                    embedding = embed_text_robusto(guion)
+                with st.spinner("🔄 Procesando guión, generando embedding y score..."):
 
-                if embedding is None:
-                    st.error("❌ Hubo un error generando el embedding.")
-                else:
+                    # 1. Generar embedding
+                    embedding = embed_text_robusto(guion)
+                    if embedding is None:
+                        st.error("❌ Error generando embedding.")
+                        st.stop()
+
                     st.session_state.guion_embedding = embedding
-                    st.success("✨ Embedding generado y almacenado.")
+
+                    # 2. Importar tu función de modelos
+                    from utils.procesar_guion import procesar_guion_completo
+
+                    # 3. Procesar guion con tus modelos
+                    resultados = procesar_guion_completo(
+                        texto=guion
+                    )
+
+                    # Guardar salida del modelo
+                    st.session_state.guion_resultados = resultados
+                    st.session_state.puntaje_modelo = resultados
 
             st.session_state.edit_mode = False
-            st.success("Datos guardados correctamente.")
-            st.rerun()
+            st.success("Datos procesados correctamente.")
+
+            # ===================================================
+            # 🚀 REDIRECCIÓN AUTOMÁTICA A 2_Guion.py
+            # ===================================================
+            st.switch_page("pages/2_Guion.py")
 
 
 # ====================================================

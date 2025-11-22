@@ -1,9 +1,13 @@
 import numpy as np
 import time
 from openai import OpenAI
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
 
 client = OpenAI(
-  api_key="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"
+  api_key=os.getenv("OPENAI_API_KEY")
 )
 
 def embed_text_robusto(text, max_retries=5):

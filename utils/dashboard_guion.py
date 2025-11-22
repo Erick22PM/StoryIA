@@ -15,6 +15,7 @@ nltk.download('stopwords')
 
 
 def get_dashboard_guion(transcripcion):
+    st.markdown("---")
     st.markdown("## 📊 Análisis del guión")
 
     text = transcripcion

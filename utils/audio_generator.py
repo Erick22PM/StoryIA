@@ -2,9 +2,12 @@
 
 from elevenlabs.client import ElevenLabs
 import io
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 client_ElevenLabs = ElevenLabs(
-    api_key="sk_d2c52cf31b281957594ccd599259f6e8583375a79df93b5c"
+    api_key=os.getenv("ELEVENLABS_API")
 )
 
 def generar_audio(texto: str, voice_id: str = "default_voice") -> bytes:

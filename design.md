@@ -3,4 +3,5 @@ Paleta de colores:
 - #FDFFFC
 - #A690A4
 - #1E2019
-- #FF715Bd
+- #FF715B
+
