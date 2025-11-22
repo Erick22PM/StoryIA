@@ -141,3 +141,17 @@ Navbar para navegar entre las diferentes páginas.
     - Embeddings
     - Variables 
 
+3. Modelos de análisis:
+    - Score narrativo
+    - Cluster asignado
+
+4. Chatbot explicativo (LLM prompt tuning):
+    - Explica mejoras y guión corregido.
+
+5. Output visual: 
+    - Score narrativo
+    - Feedback textual
+
+
+
+
