@@ -1,9 +1,12 @@
 import streamlit as st
 from utils.chatbot_narracoach import NarraCoach
 from openai import OpenAI
-from dotenv import load_dotenv
 import os
-load_dotenv()
+
+# --- Bloqueo: si no está procesado, no puedes entrar ---
+if "procesado" not in st.session_state or st.session_state.procesado is False:
+    st.error("⚠️ Debes primero cargar y procesar un guion.")
+    st.stop()
 
 client = OpenAI(
   api_key=os.getenv("OPENAI_API_KEY")

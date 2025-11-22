@@ -1,5 +1,5 @@
 import utils.variables_to_score as vts
-
+import streamlit as st
 
 # utils/procesar_guion.py
 def procesar_guion_completo(texto):
@@ -9,5 +9,9 @@ def procesar_guion_completo(texto):
     """
     # Ejemplo de respuesta (tú pondrás tus modelos reales)
     score = vts.get_score_from_text(texto)
+
+    # Guardar en session state
+    st.session_state.puntaje_modelo = score
+
     return score
 

@@ -6,6 +6,12 @@ import os
 from utils.chatbot_narracoach import NarraCoach
 from utils.chat_ui import bubble_user, bubble_assistant, thinking_spinner
 
+
+# --- Bloqueo: si no está procesado, no puedes entrar ---
+if "procesado" not in st.session_state or st.session_state.procesado is False:
+    st.error("⚠️ Debes primero cargar y procesar un guion.")
+    st.stop()
+
 with st.sidebar:
     st.image("assets/logo.png", width=150)
 

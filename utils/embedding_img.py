@@ -98,8 +98,7 @@ def buscar_similares_por_canal(
     return df_result
 
 def get_img_similares(image_from_user):
-    df = pd.read_parquet("./DATA/dataframes/embeddings_v5_ViT-B32.parquet")
-    df['img_path'] = df['id'].map(lambda x: f"./DATA/images/{x}.jpg")
+    df = pd.read_parquet("./DATA/dataframes/PROD_DATASET.parquet")
 
     image_to_compare = image_from_user
 

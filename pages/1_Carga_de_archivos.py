@@ -2,6 +2,9 @@ import streamlit as st
 import numpy as np
 from utils.text_embeddings import embed_text_robusto
 
+if "procesado" not in st.session_state:
+    st.session_state.procesado = False
+
 with st.sidebar:
     st.image("assets/logo.png", width=150)
     
@@ -69,13 +72,15 @@ if st.session_state.edit_mode:
                     from utils.procesar_guion import procesar_guion_completo
 
                     # 3. Procesar guion con tus modelos
-                    resultados = procesar_guion_completo(
-                        texto=guion
-                    )
+                    with st.spinner("🏗 Generando score..."):
+                        resultados = procesar_guion_completo(
+                            texto=guion
+                        )
 
                     # Guardar salida del modelo
                     st.session_state.guion_resultados = resultados
-                    st.session_state.puntaje_modelo = resultados
+                    st.session_state.puntaje_modelo = float(resultados)
+                    st.session_state.procesado = True
 
             st.session_state.edit_mode = False
             st.success("Datos procesados correctamente.")
