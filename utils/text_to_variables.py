@@ -146,7 +146,7 @@ def get_variables_from_text(text):
 
     var = [i for i in df.columns if i not in columnas_palabras]
 
-    clusterer, X_norm = cargar_modelo_hdbscan("utils/models//hdbscan_model.pkl")
+    clusterer, X_norm = cargar_modelo_hdbscan()
     label, prob = asignar_cluster_produccion(
         texto=df.iloc[0]['transcripcion'],
         embed_fn=emgu.embed_text_robusto,
