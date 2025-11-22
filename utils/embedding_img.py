@@ -74,7 +74,7 @@ def buscar_similares_por_canal(
     for canal, df_canal in df_embeddings.groupby("canal"):
         
         # Matriz de embeddings del canal
-        X = np.vstack(df_canal["embedding"].values)
+        X = np.vstack(df_canal["embedding_img"].values)
 
         # Distancia coseno
         sim = cosine_similarity(query_vec, X)[0]
