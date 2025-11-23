@@ -16,6 +16,15 @@ def load_file(file_name):
     if not os.path.exists(path):
         raise FileNotFoundError(f"❌ No se encontró el modelo en: {path}")
     return load_model(path)
+
+def load_cler(file_name):
+    base = os.path.dirname(__file__)         # ruta del archivo data_loader.py
+    path = os.path.join(base, "..", "utils/models", file_name)
+    path = os.path.abspath(path)
+    
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"❌ No se encontró el modelo en: {path}")
+    return  joblib.load(path)
 # =============================
 #   embeddins
 # =============================
@@ -102,12 +111,12 @@ def load_hdbscan_mod():
 
 @st.cache_resource
 def load_scaler_bajo_y():
-    return joblib.load("scaler-bajo_y.pkl")
+    return load_cler("scaler-bajo_y.pkl")
 
 @st.cache_resource
 def load_scaler_viral_y():
-    return joblib.load("scaler-viral_y.pkl")
+    return load_cler("scaler-viral_y.pkl")
 
 @st.cache_resource
 def load_scaler_normal_y():
-    return joblib.load("scaler-normal_y.pkl")
+    return load_cler("scaler-normal_y.pkl")
