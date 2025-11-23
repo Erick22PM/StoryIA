@@ -58,16 +58,19 @@ def load_embeddings():
 def load_clas_model():
     return load_model("./models/modelo_clasificacion.keras")
 
+@st.cache_resource
 def load_r_bajo_model():
     return load_model("./models/modelo_regr_bajo.keras")
 
+@st.cache_resource
 def load_r_normal_model():
     return load_model("./models/modelo_regr_normal.keras")
 
+@st.cache_resource
 def load_r_viral_model():
     return load_model("./models/modelo_regr_viral.keras")
 
-@st.cache_resource(show_spinner="Cargando modelo HDBSCAN...")
+@st.cache_resource
 def load_hdbscan_mod():
     url = "https://huggingface.co/ErickPM22/clustering/resolve/main/hdbscan_model.pkl"
     local_path = "/mount/src/modelo_hdbscan.pkl"   # lugar seguro en Streamlit Cloud
