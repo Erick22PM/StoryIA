@@ -5,7 +5,7 @@ import utils.dashboard_guion
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 import ast
-
+from utils.data_loader import load_main_dataset
 with st.sidebar:
     st.image("assets/logo.png", width=150)
 st.title("📄 Vista de guión por ID")
@@ -14,14 +14,11 @@ st.title("📄 Vista de guión por ID")
 # ======================================================
 # Cargar dataframe (con cache)
 # ======================================================
-@st.cache_data
-def load_data(parquet_path: str):
-    return pd.read_parquet(parquet_path)
 
 PARQUET_PATH = "./DATA/dataframes/PROD_DATASET.parquet"
 
 try:
-    df = load_data(PARQUET_PATH)
+    df = load_main_dataset()
 except Exception as e:
     st.error(f"❌ Error cargando archivo parquet: {e}")
     st.stop()

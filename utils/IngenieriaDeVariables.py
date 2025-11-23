@@ -218,7 +218,7 @@ def generar_ngram_features_es(
     # ==============================
     # STOPWORDS EN ESPAÑOL
     # ==============================
-    stop_es = set(stopwords.words('spanish'))
+    stop_es = stop_words_es
 
     # ==============================
     # LIMPIAR NOMBRES DE FEATURES

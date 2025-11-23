@@ -8,6 +8,7 @@ from PIL import Image
 import numpy as np
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
+from utils.data_loader import load_main_dataset
 
 # Cargar CLIP (ViT-B/32)
 device = "cpu"
@@ -98,7 +99,7 @@ def buscar_similares_por_canal(
     return df_result
 
 def get_img_similares(image_from_user):
-    df = pd.read_parquet("./DATA/dataframes/PROD_DATASET.parquet")
+    df = load_main_dataset()
 
     image_to_compare = image_from_user
 

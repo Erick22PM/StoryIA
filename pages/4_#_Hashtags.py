@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import utils.mostrar_datos_ingresados
 from utils.hashtag_recommender import recomendar_hashtags_existentes
-
+from utils.data_loader import load_hashtags
 
 with st.sidebar:
     st.image("assets/logo.png", width=150)
@@ -18,7 +18,7 @@ utils.mostrar_datos_ingresados.mostrar_datos_ingresados(st.session_state)
 # CARGAR DATAFRAME DE HASHTAGS UNA SOLA VEZ
 # =====================================================
 if "df_hash" not in st.session_state:
-    st.session_state.df_hash = pd.read_parquet("DATA/dataframes/hashtags.parquet")
+    st.session_state.df_hash = load_hashtags()
 
 # Inicializar cache de resultados
 if "hashtags_existentes" not in st.session_state:

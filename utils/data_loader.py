@@ -25,6 +25,17 @@ def load_cler(file_name):
     if not os.path.exists(path):
         raise FileNotFoundError(f"❌ No se encontró el modelo en: {path}")
     return  joblib.load(path)
+
+
+def load_parquet(file_name):
+    base = os.path.dirname(__file__)         # ruta del archivo data_loader.py
+    path = os.path.join(base, "..", "DATA/dataframes", file_name)
+    path = os.path.abspath(path)
+    
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"❌ No se encontró el modelo en: {path}")
+    return  pd.read_parquet(path)
+
 # =============================
 #   embeddins
 # =============================
@@ -60,12 +71,21 @@ def load_spacy():
 # ==========================================================
 @st.cache_data(show_spinner="Cargando dataset principal...")
 def load_main_dataset():
-    return pd.read_parquet("./DATA/dataframes/PROD_DATASET.parquet")
+    return load_parquet("PROD_DATASET.parquet")
+
+
+@st.cache_data(show_spinner="Cargando hashtags...")
+def load_hashtags():
+    return load_parquet("hashtags.parquet")
+
+@st.cache_data(show_spinner="Cargando EDA...")
+def load_eda():
+    return load_parquet("2_EDA_AGENT.parquet")
 
 
 @st.cache_data(show_spinner="Cargando embeddings...")
 def load_embeddings():
-    return pd.read_parquet("./DATA/dataframes/clustering_y_embedding_guiones.parquet")
+    return load_parquet("clustering_y_embedding_guiones.parquet")
 
 
 # =============================

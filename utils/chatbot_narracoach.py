@@ -3,7 +3,7 @@ import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 from openai import OpenAI
 import os
-
+from utils.data_loader import load_eda
 
 # ======================================================
 # Inicializar cliente OpenAI
@@ -76,7 +76,7 @@ class NarraCoach:
         - elementos_retencion
         y todo lo que necesites.
         """
-        self.df = pd.read_parquet("./DATA/dataframes/2_EDA_AGENT.parquet")
+        self.df = load_eda()
 
         # Validación mínima
         if "embedding_guion" not in self.df.columns:
