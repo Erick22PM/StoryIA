@@ -8,13 +8,15 @@ from collections import Counter
 import streamlit as st
 import pandas as pd
 import seaborn as sns
-
-
 import re
+
+try:
+    nltk.data.find("corpora/stopwords")
+except LookupError:
+    nltk.download("stopwords")
 
 def simple_tokenize(text):
     return re.findall(r"\b\w+\b", text.lower())
-
 
 def get_dashboard_guion(transcripcion):
     st.markdown("---")
