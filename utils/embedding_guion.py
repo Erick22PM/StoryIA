@@ -3,7 +3,7 @@ from tqdm import tqdm
 import numpy as np
 from openai import OpenAI
 import time
-import tiktoken
+from load_nltk import load_tokenizer
 import numpy as np
 import time
 from sklearn.metrics.pairwise import cosine_similarity
@@ -13,7 +13,7 @@ client = OpenAI(
   api_key=os.getenv("OPENAI_API_KEY")
 )
 
-tokenizer = tiktoken.get_encoding("cl100k_base")
+tokenizer = load_tokenizer()
 
 # --- EMBEDDING INDIVIDUAL CON REINTENTOS ---
 def embed_text_robusto(text, max_retries=5):

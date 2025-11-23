@@ -12,29 +12,10 @@ tf.config.optimizer.set_jit(False)
 tf.config.run_functions_eagerly(True)
 
 import numpy as np
-import pandas as pd
-import joblib
-from sklearn.model_selection import train_test_split
-from tensorflow.keras.models import load_model
 import utils.text_to_variables as ttv
 
-# =========================
-# CARGAR MODELOS
-# =========================
+from data_loader import load_clas_model, load_r_bajo_model, load_r_normal_model, load_r_viral_model, load_scaler_bajo_y, load_scaler_viral_y, load_scaler_normal_y
 
-model_clasificacion = load_model("utils/models/modelo_clasificacion.keras")
-
-model_reg_normal = load_model("utils/models/modelo_regr_normal.keras")
-model_reg_bajo = load_model("utils/models/modelo_regr_bajo.keras")
-model_reg_viral = load_model("utils/models/modelo_regr_viral.keras")
-
-# =========================
-# CARGAR SCALERS
-# =========================
-
-scaler_y_bajo = joblib.load("utils/models/scaler-bajo_y.pkl") 
-scaler_y_viral = joblib.load("utils/models/scaler-viral_y.pkl") 
-scaler_y_normal = joblib.load("utils/models/scaler-normal_y.pkl") 
 
 
 def predecir_valor(df):
@@ -59,6 +40,7 @@ def predecir_valor(df):
     # -----------------------------
     # 3. Clasificar la fila
     # -----------------------------
+    model_clasificacion = load_clas_model()
     probs = model_clasificacion.predict(X)
     clase_pred = np.argmax(probs, axis=1)[0]   # 0=BAJO, 1=NORMAL, 2=VIRAL
 
@@ -66,14 +48,14 @@ def predecir_valor(df):
     # 4. Seleccionar modelo respectivo
     # -----------------------------
     if clase_pred == 0:
-        modelo = model_reg_bajo
-        scaler_y = scaler_y_bajo
+        modelo = load_r_bajo_model()
+        scaler_y = load_scaler_bajo_y()
     elif clase_pred == 1:
-        modelo = model_reg_normal
-        scaler_y = scaler_y_normal
+        modelo = load_r_normal_model()
+        scaler_y = load_scaler_normal_y()
     else:
-        modelo = model_reg_viral
-        scaler_y = scaler_y_viral
+        modelo = load_r_viral_model()
+        scaler_y = load_scaler_viral_y()
 
     # -----------------------------
     # 5. Predecir valor

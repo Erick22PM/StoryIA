@@ -1,7 +1,6 @@
 # utils/hashtag_recommender.py
 
 import numpy as np
-import pandas as pd
 import re
 from collections import Counter
 

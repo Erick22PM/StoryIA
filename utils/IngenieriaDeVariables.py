@@ -2,23 +2,23 @@ import pandas as pd
 import numpy as np
 import re
 import emoji
-import nltk
-from nltk.corpus import stopwords
-from nltk.tokenize import sent_tokenize
-import spacy
 from tqdm import tqdm
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from sentence_transformers import SentenceTransformer, util
+from sentence_transformers import util
 from sklearn.feature_extraction.text import CountVectorizer
 
-nltk.download('punkt')
-nltk.download('stopwords')
+from utils.load_nltk import load_nltk
+load_nltk()
+from nltk.corpus import stopwords
+from nltk.tokenize import sent_tokenize
 
-# === Cargar modelos ===
-nlp_es = spacy.load("es_core_news_sm", disable=['ner'])
-embedder = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
+from utils.data_loader import load_spacy, load_embedder
+from load_nltk import load_nltk_stop_words
 
-stop_words_es = set(stopwords.words('spanish'))
+nlp_es = load_spacy()
+embedder = load_embedder()
+
+stop_words_es = load_nltk_stop_words()
 vect_es = CountVectorizer(stop_words=stop_words_es, ngram_range=(1, 30), min_df=.01, max_df=100)
 
 

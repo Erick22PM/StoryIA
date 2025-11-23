@@ -1,19 +1,12 @@
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
-import spacy
-import nltk
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
+from data_loader import load_spacy
+from load_nltk import load_nltk_stop_words
 from collections import Counter
 import streamlit as st
 import pandas as pd
 import seaborn as sns
 import re
-
-try:
-    nltk.data.find("corpora/stopwords")
-except LookupError:
-    nltk.download("stopwords")
 
 def simple_tokenize(text):
     return re.findall(r"\b\w+\b", text.lower())
@@ -28,7 +21,7 @@ def get_dashboard_guion(transcripcion):
     # Procesar texto
     # ------------------------------------------------------
     # Tokenizar y limpiar
-    stopwords_es = set(stopwords.words("spanish"))
+    stopwords_es = load_nltk_stop_words()
     tokens = simple_tokenize(text)
     tokens_limpios = [t for t in tokens if t not in stopwords_es]
 
@@ -93,7 +86,7 @@ def get_dashboard_guion(transcripcion):
     # ------------------------------------------------------
     st.subheader("🏷 Entidades nombradas (NER)")
 
-    nlp = spacy.load("es_core_news_sm")
+    nlp = load_spacy()
     doc = nlp(text)
 
     entities = [(ent.text, ent.label_) for ent in doc.ents]

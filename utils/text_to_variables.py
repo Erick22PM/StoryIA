@@ -3,18 +3,10 @@ pd.set_option("display.max_columns", None)
 
 import utils.IngenieriaDeVariables as iv
 import utils.embedding_guion as emgu
-import os
-import requests
 import re
-import nltk
-nltk.download('punkt')
-nltk.download('punkt_tab')
-nltk.download('stopwords')
-
-import joblib
+from data_loader import load_hdbscan_mod
 import numpy as np
 import hdbscan
-
 from utils.fijar_cpu import forzar_cpu
 forzar_cpu()
 
@@ -41,22 +33,7 @@ def asignar_cluster_produccion(texto, embed_fn, clusterer, threshold=0.10):
 
 
 def cargar_modelo_hdbscan():
-    url = "https://huggingface.co/ErickPM22/clustering/resolve/main/hdbscan_model.pkl"
-    local_path = "/mount/src/modelo_hdbscan.pkl"   # lugar seguro en Streamlit Cloud
-
-    # Descargar solo si no existe localmente
-    if not os.path.exists(local_path):
-        print("📥 Descargando modelo HDBSCAN desde HuggingFace...")
-        r = requests.get(url)
-        r.raise_for_status()
-        with open(local_path, "wb") as f:
-            f.write(r.content)
-
-    paquete = joblib.load(local_path)
-    clusterer = paquete["clusterer"]
-    X_norm = paquete.get("X_norm")
-    return clusterer, X_norm
-
+    return load_hdbscan_mod()
 
 # Lista que ya tienes
 lista_palabras_cols = [
