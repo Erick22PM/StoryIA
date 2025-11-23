@@ -43,12 +43,12 @@ def load_spacy():
 # ==========================================================
 @st.cache_data(show_spinner="Cargando dataset principal...")
 def load_main_dataset():
-    return pd.read_parquet("./DATA/dataframes/PROD_DATASET.parquet")
+    return pd.read_parquet("DATA/dataframes/PROD_DATASET.parquet")
 
 
 @st.cache_data(show_spinner="Cargando embeddings...")
 def load_embeddings():
-    return pd.read_parquet("./DATA/dataframes/clustering_y_embedding_guiones.parquet")
+    return pd.read_parquet("DATA/dataframes/clustering_y_embedding_guiones.parquet")
 
 
 # =============================
@@ -56,19 +56,19 @@ def load_embeddings():
 # =============================
 @st.cache_resource
 def load_clas_model():
-    return load_model("./models/modelo_clasificacion.keras")
+    return load_model("models/modelo_clasificacion.keras")
 
 @st.cache_resource
 def load_r_bajo_model():
-    return load_model("./models/modelo_regr_bajo.keras")
+    return load_model("models/modelo_regr_bajo.keras")
 
 @st.cache_resource
 def load_r_normal_model():
-    return load_model("./models/modelo_regr_normal.keras")
+    return load_model("models/modelo_regr_normal.keras")
 
 @st.cache_resource
 def load_r_viral_model():
-    return load_model("./models/modelo_regr_viral.keras")
+    return load_model("models/modelo_regr_viral.keras")
 
 @st.cache_resource
 def load_hdbscan_mod():
@@ -94,12 +94,12 @@ def load_hdbscan_mod():
 
 @st.cache_resource
 def load_scaler_bajo_y():
-    return load_model("./models/scaler-bajo_y.pkl")
+    return load_model("models/scaler-bajo_y.pkl")
 
 @st.cache_resource
 def load_scaler_viral_y():
-    return load_model("./models/scaler-viral_y.pkl")
+    return load_model("models/scaler-viral_y.pkl")
 
 @st.cache_resource
 def load_scaler_normal_y():
-    return load_model("./models/scaler-normal_y.pkl")
+    return load_model("models/scaler-normal_y.pkl")
