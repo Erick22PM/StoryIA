@@ -14,7 +14,7 @@ tf.config.run_functions_eagerly(True)
 import numpy as np
 import utils.text_to_variables as ttv
 
-from data_loader import load_clas_model, load_r_bajo_model, load_r_normal_model, load_r_viral_model, load_scaler_bajo_y, load_scaler_viral_y, load_scaler_normal_y
+from utils.data_loader import load_clas_model, load_r_bajo_model, load_r_normal_model, load_r_viral_model, load_scaler_bajo_y, load_scaler_viral_y, load_scaler_normal_y
 
 
 
