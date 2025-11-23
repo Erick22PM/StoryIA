@@ -10,7 +10,7 @@ from sentence_transformers import SentenceTransformer
 
 def load_file(file_name):
     base = os.path.dirname(__file__)         # ruta del archivo data_loader.py
-    path = os.path.join(base, "..", "models", file_name)
+    path = os.path.join(base, "..", "utils/models", file_name)
     path = os.path.abspath(path)
     
     if not os.path.exists(path):
