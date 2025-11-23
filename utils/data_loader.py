@@ -102,12 +102,12 @@ def load_hdbscan_mod():
 
 @st.cache_resource
 def load_scaler_bajo_y():
-    return load_file("scaler-bajo_y.pkl")
+    return joblib.load("scaler-bajo_y.pkl")
 
 @st.cache_resource
 def load_scaler_viral_y():
-    return load_file("scaler-viral_y.pkl")
+    return joblib.load("scaler-viral_y.pkl")
 
 @st.cache_resource
 def load_scaler_normal_y():
-    return load_file("scaler-normal_y.pkl")
+    return joblib.load("scaler-normal_y.pkl")
