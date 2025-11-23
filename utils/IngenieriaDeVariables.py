@@ -13,7 +13,7 @@ from nltk.corpus import stopwords
 from nltk.tokenize import sent_tokenize
 
 from utils.data_loader import load_spacy, load_embedder
-from load_nltk import load_nltk_stop_words
+from utils.load_nltk import load_nltk_stop_words
 
 nlp_es = load_spacy()
 embedder = load_embedder()

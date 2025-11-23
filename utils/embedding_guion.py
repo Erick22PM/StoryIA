@@ -3,7 +3,7 @@ from tqdm import tqdm
 import numpy as np
 from openai import OpenAI
 import time
-from load_nltk import load_tokenizer
+from utils.load_nltk import load_tokenizer
 import numpy as np
 import time
 from sklearn.metrics.pairwise import cosine_similarity

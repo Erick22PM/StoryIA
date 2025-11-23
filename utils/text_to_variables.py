@@ -4,7 +4,7 @@ pd.set_option("display.max_columns", None)
 import utils.IngenieriaDeVariables as iv
 import utils.embedding_guion as emgu
 import re
-from data_loader import load_hdbscan_mod
+from utils.data_loader import load_hdbscan_mod
 import numpy as np
 import hdbscan
 from utils.fijar_cpu import forzar_cpu
