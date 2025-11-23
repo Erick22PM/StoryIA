@@ -1,6 +1,15 @@
 import streamlit as st
 import numpy as np
 from utils.text_embeddings import embed_text_robusto
+import os
+
+print("📁 CONTENIDO REAL DEL DIRECTORIO /mount/src/storyia:")
+for root, dirs, files in os.walk("/mount/src/storyia", topdown=True):
+    for name in files:
+        print(os.path.join(root, name))
+    for name in dirs:
+        print(os.path.join(root, name))
+    break
 
 if "procesado" not in st.session_state:
     st.session_state.procesado = False
