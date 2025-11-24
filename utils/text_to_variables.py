@@ -4,7 +4,8 @@ pd.set_option("display.max_columns", None)
 import utils.IngenieriaDeVariables as iv
 import utils.embedding_guion as emgu
 import re
-from utils.data_loader import load_hdbscan_mod
+from utils.hdbscan_loader import cargar_hdbscan_temporal, liberar_hdbscan
+import hdbscan
 import numpy as np
 import hdbscan
 from utils.fijar_cpu import forzar_cpu
@@ -30,10 +31,6 @@ def asignar_cluster_produccion(texto, embed_fn, clusterer, threshold=0.10):
         label = -1
 
     return label, prob
-
-
-def cargar_modelo_hdbscan():
-    return load_hdbscan_mod()
 
 # Lista que ya tienes
 lista_palabras_cols = [
@@ -123,12 +120,14 @@ def get_variables_from_text(text):
 
     var = [i for i in df.columns if i not in columnas_palabras]
 
-    clusterer, X_norm = cargar_modelo_hdbscan()
+    clusterer, X_norm = cargar_hdbscan_temporal()
     label, prob = asignar_cluster_produccion(
         texto=df.iloc[0]['transcripcion'],
         embed_fn=emgu.embed_text_robusto,
         clusterer=clusterer
     )
+    # Liberar memoria inmediatamente
+    liberar_hdbscan(clusterer, X_norm)
     df['Cluster_hdbscan'] = label
     df.drop(columns={'transcripcion'}, inplace=True)
 
