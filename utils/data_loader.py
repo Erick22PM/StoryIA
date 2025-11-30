@@ -75,11 +75,6 @@ def load_spacy():
 def load_main_dataset():
     return load_parquet("PROD_DATASET.parquet")
 
-
-@st.cache_data(show_spinner="Cargando hashtags...")
-def load_hashtags():
-    return load_parquet("hashtags.parquet")
-
 @st.cache_data(show_spinner="Cargando EDA...")
 def load_eda():
     return load_parquet("2_EDA_AGENT.parquet")
