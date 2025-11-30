@@ -4,7 +4,7 @@ from openai import OpenAI
 import os
 
 # --- Bloqueo: si no está procesado, no puedes entrar ---
-if "procesado" not in st.session_state or st.session_state.procesado is False:
+if st.session_state.get("procesado") is False:
     st.error("⚠️ Debes primero cargar y procesar un guion.")
     st.stop()
 
@@ -21,31 +21,17 @@ with st.sidebar:
 # ======================================================
 # VALIDAR DATOS NECESARIOS
 # ======================================================
-if "guion_text" not in st.session_state or st.session_state.guion_text is None:
+if st.session_state.get("guion_text") is None:
     st.error("⚠️ Debes cargar un guion primero...")
     st.stop()
 
-if "guion_embedding" not in st.session_state:
-    st.error("⚠️ No se encontró embedding del guion.")
+if st.session_state.get("guion_embedding") is None:
+    st.error("⚠️ No se encontró embedding del guion. Vuelve a cargar el guión.")
     st.stop()
 
-if "puntaje_modelo" not in st.session_state:
-    st.error("⚠️ Falta el score calculado del guion.")
+if st.session_state.get("puntaje_modelo") is None:
+    st.error("⚠️ Falta el score calculado del guion. Vuelve a cargar el guión.")
     st.stop()
-
-
-# ======================================================
-# SESSION STATE
-# ======================================================
-if "chat_messages" not in st.session_state:
-    st.session_state.chat_messages = []
-
-if "narra_session" not in st.session_state:
-    st.session_state.narra_session = None
-
-if "initialized" not in st.session_state:
-    st.session_state.initialized = False
-
 
 # ======================================================
 # PRIMER MENSAJE AUTOMÁTICO

@@ -4,7 +4,7 @@ import os
 
 
 # --- Bloqueo: si no está procesado, no puedes entrar ---
-if "procesado" not in st.session_state or st.session_state.procesado is False:
+if st.session_state.get("procesado") is False:
     st.error("⚠️ Debes primero cargar y procesar un guion.")
     st.stop()
 
@@ -16,7 +16,7 @@ st.title("📄 Vista del Guión Cargado")
 # =====================================================
 # 📌 VALIDAR SI EL USUARIO YA CARGÓ UN GUIÓN
 # =====================================================
-if "guion_text" not in st.session_state or st.session_state.guion_text is None:
+if st.session_state.get("guion_text") is None:
     st.warning("⚠️ No hay guión cargado. Ve primero a la página 'Carga de archivos'.")
     if st.button("Ir a Cargar Guión"):
         st.switch_page("pages/1_Carga_de_archivos.py")
@@ -36,14 +36,14 @@ st.markdown("---")
 # =====================================================
 st.subheader("📊 Score")
 
-if "puntaje_modelo" in st.session_state:
+if not st.session_state.get("puntaje_modelo") is None:
     puntaje = st.session_state.puntaje_modelo
     st.success(f"✨ **Score del guión: {puntaje:.2f} / 100**")
 
     # Barra de progreso
     st.progress(min(max(puntaje / 100, 0), 1))  # normaliza entre 0 y 1
 else:
-    st.error("❌ No se encontró el puntaje del modelo.")
+    st.error("❌ No se encontró el puntaje del modelo. Vuelve a cargar ")
     st.stop()
 
 if st.button("Ir a feedback del guión"):
@@ -57,7 +57,7 @@ st.markdown("---")
 # =====================================================
 st.subheader("🖼️ Imágenes similares a la miniatura cargada")
 
-if "guion_image" not in st.session_state or st.session_state.guion_image is None:
+if st.session_state.get("guion_image") is None:
     st.warning("⚠️ No se encontró la miniatura cargada.")
 else:
     try:

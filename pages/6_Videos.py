@@ -197,9 +197,6 @@ else:
 # ======================================================
 ITEMS_POR_PAG = 20
 
-if "page" not in st.session_state:
-    st.session_state.page = 0
-
 total_videos = len(df_filtrado)
 total_paginas = max(1, (total_videos - 1) // ITEMS_POR_PAG + 1)
 
@@ -236,11 +233,11 @@ with col1:
 with col2:
     c1, c2 = st.columns(2)
     with c1:
-        if st.button("⬅️ Anterior", use_container_width=True) and st.session_state.page > 0:
+        if st.button("⬅️ Anterior", width='stretch') and st.session_state.page > 0:
             st.session_state.page -= 1
             st.rerun()
     with c2:
-        if st.button("Siguiente ➡️", use_container_width=True) and st.session_state.page < total_paginas - 1:
+        if st.button("Siguiente ➡️", width='stretch') and st.session_state.page < total_paginas - 1:
             st.session_state.page += 1
             st.rerun()
 

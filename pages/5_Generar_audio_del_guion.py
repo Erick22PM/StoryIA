@@ -12,7 +12,7 @@ st.title("🎙️ Generar audio del guión")
 # =====================================================
 # VALIDACIÓN DE GUION CARGADO
 # =====================================================
-if "guion_text" not in st.session_state or st.session_state.guion_text is None:
+if st.session_state.get("guion_text") is None:
     st.warning("⚠️ No hay guión cargado. Ve primero a la página 'Carga de archivos'.")
 
     if st.button("Ir a Cargar Guión"):
@@ -25,19 +25,6 @@ st.markdown("## 📝 Guión cargado")
 
 # Mostrar guion + imagen
 utils.mostrar_datos_ingresados.mostrar_datos_ingresados(st.session_state)
-
-# =====================================================
-# Session state inicial
-# =====================================================
-if "audio_bytes" not in st.session_state:
-    st.session_state.audio_bytes = None
-
-if "audio_id" not in st.session_state:
-    st.session_state.audio_id = None
-
-if "eleven_api_key" not in st.session_state:
-    st.session_state.eleven_api_key = ""
-
 
 # =====================================================
 # CAMPO PARA API KEY

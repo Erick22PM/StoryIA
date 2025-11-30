@@ -13,18 +13,6 @@ st.title("🔖 Recomendador de Hashtags")
 utils.mostrar_datos_ingresados.mostrar_datos_ingresados(st.session_state)
 
 # =====================================================
-# CARGAR DATAFRAME DE HASHTAGS UNA SOLA VEZ
-# =====================================================
-
-# Inicializar cache de resultados
-if "hashtags_existentes" not in st.session_state:
-    st.session_state.hashtags_existentes = None
-
-# Inicializar resultados IA
-if "hashtags_ia" not in st.session_state:
-    st.session_state.hashtags_ia = None
-
-# =====================================================
 # BOTÓN PARA RECOMENDAR CON IA (OPENAI)
 # =====================================================
 
@@ -34,10 +22,10 @@ if st.session_state.hashtags_ia is None:
     if st.button("🧠 Generar hashtags"):
 
         # Validar guion
-        if "guion_text" not in st.session_state or not st.session_state.guion_text:
+        if "guion_text" not in st.session_state:
             st.error("❌ No hay guion cargado.")
         else:
-            st.info("⏳ Generando hashtags con IA...")
+            st.info("⏳ Generando hashtags...")
             try:
                 st.session_state.hashtags_ia = generar_hashtags_desde_guion(
                     st.session_state.guion_text
@@ -51,7 +39,7 @@ if st.session_state.hashtags_ia is None:
 # MOSTRAR RESULTADOS IA
 # =====================================================
 if st.session_state.hashtags_ia is not None:
-    st.markdown("## 🤖 Hashtags generados con IA")
+    st.markdown("## 🤖 Hashtags generados")
 
     relacionados = st.session_state.hashtags_ia.get("relacionados", [])
     viralidad = st.session_state.hashtags_ia.get("viralidad", [])
