@@ -1,9 +1,29 @@
 import streamlit as st
 
-with st.sidebar:
-    st.image("assets/logo.png", width=150)
+def init_state():
+    defaults = {
+        "guion_text": None,
+        "guion_image": None,
+        "guion_embedding": None,
+        "guion_resultados": None,
+        "puntaje_modelo": None,
+        "chat_messages": [],
+        "narra_session": None,
+        "initialized": False,
+        "hashtags_ia": None,
+        "audio_bytes": None,
+        "audio_id": None,
+        "eleven_api_key": "",
+        "page": 0,
+        "selected_id": 7256491483417644294,
+        "procesado": False,
+        "edit_mode": True,
+    }
+    for k, v in defaults.items():
+        if k not in st.session_state:
+            st.session_state[k] = v
 
-
+init_state()
 
 
 st.set_page_config(
@@ -11,6 +31,9 @@ st.set_page_config(
     page_icon="🎬",
     layout="wide"
 )
+
+with st.sidebar:
+    st.image("assets/logo.png", width=150)
 
 st.title("🎬 StoryIA — Plataforma de Análisis Narrativo para Videos")
 st.markdown("""
