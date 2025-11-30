@@ -114,7 +114,7 @@ else:
 
         with col_img:
             st.subheader("Imagen cargada")
-            st.image(st.session_state.guion_image, use_column_width=True)
+            st.image(st.session_state.guion_image, use_container_width=True)
 
         with col_text:
             st.subheader("Guion cargado")

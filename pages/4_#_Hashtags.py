@@ -27,30 +27,24 @@ if "hashtags_ia" not in st.session_state:
 # =====================================================
 # BOTÓN PARA RECOMENDAR CON IA (OPENAI)
 # =====================================================
-if st.button("🧠 Recomendar hashtags"):
 
-    # Validar guion
-    if "guion_text" not in st.session_state or not st.session_state.guion_text:
-        st.error("❌ No hay guion cargado.")
-    else:
-        st.info("⏳ Generando hashtags con IA...")
-        try:
-            st.session_state.hashtags_ia = generar_hashtags_desde_guion(
-                st.session_state.guion_text
-            )
-            st.success("🚀 Hashtags generados")
-        except Exception as e:
-            st.error(f"⚠️ Error al generar hashtags con IA: {e}")
+# Mostrar el botón SOLO si no se han generado hashtags aún
+if st.session_state.hashtags_ia is None:
 
+    if st.button("🧠 Generar hashtags"):
 
-# =====================================================
-# MOSTRAR RESULTADOS BBDD EXISTENTE
-# =====================================================
-if st.session_state.hashtags_existentes is not None:
-    st.markdown("## 🧩 Hashtags existentes recomendados")
-
-    df = st.session_state.hashtags_existentes[["hashtag"]]
-    st.dataframe(df, width='stretch')
+        # Validar guion
+        if "guion_text" not in st.session_state or not st.session_state.guion_text:
+            st.error("❌ No hay guion cargado.")
+        else:
+            st.info("⏳ Generando hashtags con IA...")
+            try:
+                st.session_state.hashtags_ia = generar_hashtags_desde_guion(
+                    st.session_state.guion_text
+                )
+                st.success("🚀 Hashtags generados")
+            except Exception as e:
+                st.error(f"⚠️ Error al generar hashtags con IA: {e}")
 
 
 # =====================================================
@@ -68,7 +62,6 @@ if st.session_state.hashtags_ia is not None:
         st.markdown("### 🎯 Relacionados con el guion")
         if relacionados:
             for h in relacionados:
-                # asegurar formato con '#'
                 if not h.startswith("#"):
                     h = "#" + h.strip()
                 st.write(f"- {h}")
@@ -84,3 +77,9 @@ if st.session_state.hashtags_ia is not None:
                 st.write(f"- {h}")
         else:
             st.write("No se generaron hashtags de viralidad.")
+
+    # (OPCIONAL) Botón de regenerar
+    st.markdown("---")
+    if st.button("🔄 Regenerar hashtags"):
+        st.session_state.hashtags_ia = None
+        st.rerun()
