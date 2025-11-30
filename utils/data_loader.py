@@ -5,6 +5,7 @@ from tensorflow.keras.models import load_model
 import joblib
 import os
 import requests
+from pathlib import Path
 
 from sentence_transformers import SentenceTransformer
 
@@ -61,7 +62,8 @@ def load_spacy():
     Carga el modelo SpaCy español en cache (una sola vez por sesión)
     """
     try:
-        return spacy.load("es_core_news_sm", disable=["ner"])
+        model_path = Path("utils/spacy/es_core_news_sm/es_core_news_sm-3.8.0")
+        return spacy.load(model_path)
     except Exception as e:
         raise RuntimeError(f"Error cargando SpaCy: {e}")
 
